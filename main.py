@@ -42,7 +42,7 @@ def audio_callback(indata, frames, time, status):
     print(f"目前頻率: {peak_freq:8.2f} Hz")
 
     if volume_norm >= THRESHOLD and peak_freq > 100 and peak_freq < 150 and not playing_media:
-        print(f"音量超過閥值 ({THRESHOLD})！目前音量: {volume_norm:.2f}, 頻率: {peak_freq:.2f} Hz，啟動媒體檔案！")
+        print(f"音量超過閥值 ({THRESHOLD})！目前音量: {volume_norm:.2f}, 頻率: {peak_freq:.2f} Hz，啟動大江大海江大海！")
         playing_media = True
         subprocess.Popen(['xdg-open', MEDIA_FILE]).wait()
         playing_media = False
