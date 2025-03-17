@@ -26,6 +26,9 @@ def audio_callback(indata, frames, time, status):
     global highest_volume, playing_media
 
     if playing_media:
+        volume_norm = 0.0
+        peak_freq = 0.0
+        playing_media = False
         return
 
     volume_norm = np.linalg.norm(indata) * 10
@@ -43,10 +46,10 @@ def audio_callback(indata, frames, time, status):
 
     if volume_norm >= THRESHOLD and peak_freq > 100 and peak_freq < 150 and not playing_media:
         print(f"音量超過閥值 ({THRESHOLD})！目前音量: {volume_norm:.2f}, 頻率: {peak_freq:.2f} Hz，啟動大江大海江大海！")
+        #subprocess.Popen(['xdg-open', MEDIA_FILE]).wait()
+        subprocess.run(['mpv', '--fs', MEDIA_FILE])  # 使用 mpv 播放並等待結束
         playing_media = True
-        subprocess.Popen(['xdg-open', MEDIA_FILE]).wait()
-        playing_media = False
-        sys.exit(0)
+        #sys.exit(0)
 
 # 主程式邏輯
 if __name__ == "__main__":
